@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace EFormsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class EFormsBundle extends Bundle
 {
 }
