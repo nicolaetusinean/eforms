@@ -35,6 +35,9 @@
         "symfony/phpunit-bridge": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
+    "provide": {
+        "ext-mongo": ">= 1.0"
+    },
     "scripts": {
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
