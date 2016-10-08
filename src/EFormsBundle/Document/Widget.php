@@ -3,12 +3,15 @@
 namespace EFormsBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use EFormsBundle\Traits\ConstructableProperties;
 
 /**
  * @ODM\Document
  */
 class Widget
 {
+    use ConstructableProperties;
+
     /**
      * @var int
      *
@@ -60,7 +63,7 @@ class Widget
     public $className;
 
     /**
-     * @var string
+     * @var bool
      *
      * @ODM\Field(type="bool")
      */
@@ -74,6 +77,34 @@ class Widget
     public $placeholder;
 
     /**
+     * @var int
+     *
+     * @ODM\Field(type="integer")
+     */
+    public $min;
+
+    /**
+     * @var int
+     *
+     * @ODM\Field(type="integer")
+     */
+    public $max;
+
+    /**
+     * @var int
+     *
+     * @ODM\Field(type="integer")
+     */
+    public $step;
+
+    /**
+     * @var int
+     *
+     * @ODM\Field(type="integer")
+     */
+    public $maxlength;
+
+    /**
      * @var string
      *
      * @ODM\Field
@@ -81,9 +112,9 @@ class Widget
     public $value;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ODM\Field
+     * @ODM\Field(type="hash")
      */
     public $values;
 }

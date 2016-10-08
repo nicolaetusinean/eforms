@@ -3,12 +3,15 @@
 namespace EFormsBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use EFormsBundle\Traits\ConstructableProperties;
 
 /**
  * @ODM\Document
  */
 class Form
 {
+    use ConstructableProperties;
+
     /**
      * @var int
      *
