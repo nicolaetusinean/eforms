@@ -15,20 +15,6 @@ class LoadForms implements FixtureInterface
             'description' => 'Cerere pentru acordarea indemnizaţiei de creştere a copilului / stimulentului de inserţie / indemnizaţiei lunare / sprijinului lunar şi alocaţiei de stat pentru copii',
             'sections' => array(
                 array(
-                    'label' => 'Cerere',
-                    'widgets' =>
-                        array(
-                            array(
-                                'type' => 'number',
-                                'label' => 'Numar',
-                                'description' => 'info box',
-                                'min' => '0',
-                                'step' => '1',
-                                'name' => 'cerere-numar',
-                            ),
-                        ),
-                ),
-                array(
                     'label' => 'Datele personale ale solicitantului',
                     'widgets' =>
                         array(

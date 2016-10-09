@@ -10,7 +10,8 @@ jQuery(document).ready(function($) {
             className: {
               label: 'Add validation',
               options: {
-                'Cnp': 'CNP validation'
+                "": "None",
+                'Email': 'E-mail validation'
               }
             }
           },
@@ -24,6 +25,13 @@ jQuery(document).ready(function($) {
               label: 'Max',
               maxlength: '10',
               description: 'Maximum'
+            },
+            className: {
+              label: 'Add validation',
+              options: {
+                "": "None",
+                'Cnp': 'CNP validation'
+              }
             }
           }
         }
