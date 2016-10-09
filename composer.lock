@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e689449dacc3dfd7f92ee905075cd354",
-    "content-hash": "0372a47ae2218bc47325ccb09652a5f6",
+    "hash": "41cce4609088b62a793577fcd1d953ba",
+    "content-hash": "be3c6f2e84dcfcb3745426595c5d8d67",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -858,7 +858,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jakub Hus√°k",
+                    "name": "Jakub Hus·k",
                     "email": "husak.j@gmail.com"
                 },
                 {
@@ -866,7 +866,7 @@
                     "homepage": "https://github.com/mongofill/mongofill/graphs/contributors"
                 },
                 {
-                    "name": "M√°ximo Cuadros",
+                    "name": "M·ximo Cuadros",
                     "email": "mcuadros@gmail.com"
                 }
             ],

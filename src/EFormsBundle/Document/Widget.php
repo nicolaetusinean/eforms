@@ -2,15 +2,18 @@
 
 namespace EFormsBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use EFormsBundle\Traits\ConstructableProperties;
 
 /**
- * @ODM\Document
+ * @ODM\EmbeddedDocument
  */
 class Widget
 {
-    use ConstructableProperties;
+    use ConstructableProperties {
+        __construct as _construct;
+    }
 
     /**
      * @var int
@@ -112,9 +115,24 @@ class Widget
     public $value;
 
     /**
-     * @var array
+     * @var Option[]
      *
-     * @ODM\Field(type="hash")
+     * @ODM\EmbedMany(targetDocument="Option")
      */
-    public $values;
+    public $values = [];
+
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $values = isset($data['values']) ? $data['values'] : [];
+        foreach ($values as &$value) {
+            $value = new Option($value);
+        }
+        $data['values'] = $values;
+
+        $this->_construct($data);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace EFormsBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use EFormsBundle\Traits\ConstructableProperties;
 
@@ -10,7 +11,9 @@ use EFormsBundle\Traits\ConstructableProperties;
  */
 class Section
 {
-    use ConstructableProperties;
+    use ConstructableProperties {
+        __construct as _construct;
+    }
 
     /**
      * @var string
@@ -20,9 +23,23 @@ class Section
     public $label;
 
     /**
-     * @var FormWidget[]
+     * @var Widget[]
      *
-     * @ODM\EmbedMany(targetDocument="FormWidget")
+     * @ODM\EmbedMany(targetDocument="Widget")
      */
-    public $widgets;
+    public $widgets = [];
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $widgets = isset($data['widgets']) ? $data['widgets'] : [];
+        foreach ($widgets as &$widget) {
+            $widget = new Widget($widget);
+        }
+        $data['widgets'] = $widgets;
+
+        $this->_construct($data);
+    }
 }
