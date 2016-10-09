@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
       dataType: 'json',
       formData: formBuilder.formData
     });
-
+    $('#myModal').modal('show');
     $.ajax({
       url: '/app_dev.php/admin/save',
       type: 'POST',
@@ -70,9 +70,19 @@ jQuery(document).ready(function($) {
         description: formDescription,
         json: formBuilder.formData
       },
-      dataType: 'json'
+      dataType: 'json',
+      success: function(data){
+        if (data.valid == 1) {
+          window.location.href = "/app_dev.php/admin/list?success=true";
+        }
+        $('#myModal').modal('show');
+      },
+      error: function(data){
+        $('#myModal .modal-body').html('<div class="alert alert-danger" role="alert">There has been an error!</div>');
+      }
     });
 
     window.sessionStorage.setItem('formData', JSON.stringify(formBuilder.formData));
   });
+
 });

@@ -104,6 +104,15 @@ body {
     border-radius: 50%;
 }
 
+/*
+ * List forms
+ */
+.forms-list h3 {
+    height: 75px;
+}
+.forms-list .description {
+    height: 82px;
+}
 .errors {
     color: white;
     background-color: red;

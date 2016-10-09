@@ -7,21 +7,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomeController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="eforms_home_index")
      *
      * @Template
      */
     public function indexAction(Request $request)
     {
-        return array('a' => 'b');
-        // replace this example code with whatever you need
-        /*return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);*/
+        $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
+        $qb = $dm->createQueryBuilder();
+        $query = $qb->find(Form::class)->getQuery();
+
+        return ["data" => $query->execute()];
     }
 
     /**
@@ -30,7 +31,7 @@ class HomeController extends Controller
      *
      * @return array
      *
-     * @Route("/view/{id}", name="view")
+     * @Route("/view/{id}", name="eforms_home_view")
      *
      * @Template
      */
@@ -38,10 +39,17 @@ class HomeController extends Controller
     {
         $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
         $form = $dm->find(Form::class, $id);
-        $form = $this->container->get('serializer')->normalize($form);
 
-        return array(
-            'form' => reset($form['sections'])['widgets'],
-        );
+        if ($form === null) {
+            $msg = sprintf('Missing form object form id %s.', $id);
+
+            throw new NotFoundHttpException($msg);
+        }
+
+        $form = $this->container->get('serializer')->normalize($form);
+        $section = reset($form['sections']);
+        $widgets = $section['widgets'];
+
+        return array('widgets' => $widgets);
     }
 }
