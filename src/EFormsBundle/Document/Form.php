@@ -47,7 +47,7 @@ class Form
      */
     public function __construct(array $data = [])
     {
-        $sections = $data['sections'] ?? [];
+        $sections = $data['sections'] ? [];
         foreach ($sections as &$section) {
             $section = new Section($section);
         }
