@@ -388,7 +388,7 @@ Validator.Between = function(options) {
 
     this.validate = function(params) {
 
-        if (typeof params === 'object' && typeof params[self.fieldName] === 'number') {
+        if (typeof params === 'object' && typeof params[self.fieldName] !== 'undefined' && /^\d+$/.test(params[self.fieldName])) {
 
             var length = parseFloat(params[self.fieldName]);
             if (length >= self.min) {
