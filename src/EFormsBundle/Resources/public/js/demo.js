@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
       dataType: 'json',
       success: function(data){
         if (data.valid == 1) {
-          window.location.href = "/app_dev.php/admin?success=true";
+          window.location.href = "/app_dev.php/admin/list?success=true";
         }
         $('#myModal').modal('show');
       },

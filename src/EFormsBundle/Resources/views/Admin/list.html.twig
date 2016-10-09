@@ -17,7 +17,7 @@
 							<span class="glyphicon glyphicon-eye-open"></span> Vezi
 						</a>
 						<a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-pencil"></span> Editeaza</a>
-						<a href="/admin/delete/{{ item.id|e }}" class="btn btn-danger clickConfirm" role="button"><span class="glyphicon glyphicon-remove"></span> Sterge</a>
+						<a href="{{ path('eforms_admin_delete', {id: item.id}) }}" class="btn btn-danger clickConfirm" role="button"><span class="glyphicon glyphicon-remove"></span> Sterge</a>
 					</p>
 				</div>
 			</div>
