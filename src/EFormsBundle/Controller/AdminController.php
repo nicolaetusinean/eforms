@@ -94,6 +94,6 @@ class AdminController extends Controller
         $dm->remove($item);
         $dm->flush();
 
-        return $this->redirect('/admin');
+        return $this->redirect($this->generateUrl('eforms_admin_list'));
     }
 }
