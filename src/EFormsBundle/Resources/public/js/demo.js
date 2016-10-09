@@ -1,12 +1,34 @@
 jQuery(document).ready(function($) {
   var buildWrap = document.querySelector('.build-wrap'),
-    renderWrap = document.querySelector('.render-wrap'),
-    editBtn = document.getElementById('edit-form'),
-    formData = window.sessionStorage.getItem('formData'),
-    editing = true,
-    fbOptions = {
-      dataType: 'json'
-    };
+      renderWrap = document.querySelector('.render-wrap'),
+      editBtn = document.getElementById('edit-form'),
+      formData = window.sessionStorage.getItem('formData'),
+      editing = true,
+      fbOptions = {
+        dataType: 'json',
+        typeUserAttrs: {
+          text: {
+            className: {
+              label: 'Add validation',
+              options: {
+                'Cnp': 'CNP validation'
+              }
+            }
+          },
+          number: {
+            min: {
+              label: 'Min',
+              maxlength: '10',
+              description: 'Minimum'
+            },
+            max: {
+              label: 'Max',
+              maxlength: '10',
+              description: 'Maximum'
+            }
+          }
+        }
+      };
 
   if (formData) {
     fbOptions.formData = JSON.parse(formData);
