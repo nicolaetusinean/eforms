@@ -29,6 +29,7 @@
         "incenteev/composer-parameter-handler": "^2.0",
 
         "mongofill/mongofill": "dev-master@dev",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
         "twig/extensions": "^1.4"
     },
     "require-dev": {
