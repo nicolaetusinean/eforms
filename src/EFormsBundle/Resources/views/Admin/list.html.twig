@@ -7,14 +7,14 @@
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				<div class="caption">
-					<h3>{{ item.label|e| truncate(50) }}</h3>
+					<h3>{{ item.label|e|truncate(50) }}</h3>
 					<p>{{ item.description|e|truncate(160) }}</p>
 					<p>
 						<a href="{{ path('eforms_home_view', {id: item.id}) }}" class="btn btn-primary" role="button">
 							<span class="glyphicon glyphicon-eye-open"></span> Vezi
 						</a>
 						<a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-pencil"></span> Editeaza</a>
-						<a href="#" class="btn btn-danger clickConfirm" role="button"><span class="glyphicon glyphicon-remove"></span> Sterge</a>
+						<a href="/admin/delete/{{ item.id|e }}" class="btn btn-danger clickConfirm" role="button"><span class="glyphicon glyphicon-remove"></span> Sterge</a>
 					</p>
 				</div>
 			</div>

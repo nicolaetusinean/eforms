@@ -9,24 +9,39 @@ jQuery(document).ready(function($) {
         renderWrapJqueryObj = $(renderWrap),
         formDataString = renderWrapJqueryObj.attr('data-form-builder'),
         _formSelector = "#render-form",
-        _form = $(_formSelector);
+        _form = $(_formSelector),
+        _errorsHandler = errorsHandler();
 
     var _formBuilderData = JSON.parse(formDataString);
     _formBuilderData = setColumnAsKey(_formBuilderData, 'name');
+
 
     renderWrapJqueryObj.formRender({
         dataType: 'json',
         formData: formDataString
     });
 
+    addClassToFormElements($(_formSelector), _formBuilderData, 'form-control');
     $('.submitBtn').click(function() {
-        var _formData = $(_formSelector).serializeArray();
-        if (validateFormData(_formData, _formBuilderData, _form)) {
+        _errorsHandler.removeErrors(_form);
 
+        var _formData = $(_formSelector).serializeArray();
+        var valid = validateFormData(_formData, _formBuilderData);
+        if (valid === true) {
+            _form.attr('action', URL);
+            _form.submit();
+        } else {
+            _errorsHandler.handle(_form, valid);
         }
     });
 
-    function validateFormData(formData, formBuilderData, form)
+    /**
+     * Validate the form data
+     *
+     * @param formData
+     * @param formBuilderData
+     */
+    function validateFormData(formData, formBuilderData)
     {
         var validation = new Validation();
 
@@ -51,6 +66,41 @@ jQuery(document).ready(function($) {
                         'max': formBuilderData(fieldName)['maxlength']
                     }))
                 }
+
+                if (typeof formBuilderData(fieldName)['className'] === 'string') {
+
+                    var classArr = formBuilderData(fieldName)['className'].split(/\s+/);
+
+                    $.each(classArr, function(index, className) {
+                        if (typeof Validator[className] !== "undefined") {
+                            validation.add(fieldName, new Validator[formBuilderData(fieldName)['className']]());
+                        }
+                    });
+
+                }
+            }
+
+            if (validation.chain.length) {
+                return validation.validate(formData);
+            }
+
+            return true;
+        });
+    }
+
+    function addClassToFormElements(form, formBuilderData, className)
+    {
+        $.each(formBuilderData, function(elementName) {
+
+            var formElement = form.find("[name='" + elementName + "']");
+
+            // Check for checkboxes also
+            if (formElement.length === 0) {
+                formElement = form.find("[name='" + elementName + "[]']");
+            }
+
+            if (formElement && formElement.length) {
+                formElement.addClass(className);
             }
         });
     }
