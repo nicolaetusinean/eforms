@@ -56,7 +56,7 @@ class AdminController extends Controller
         $section->label = "Test Section";
 
         foreach($widgets as $widgetData) {
-            $widget = new FormWidget($widgetData);
+            $widget = new Widget($widgetData);
             $section->widgets[] = $widget;
         }
 
@@ -65,7 +65,6 @@ class AdminController extends Controller
         $dm->persist($form);
         $dm->flush();
 
-        var_dump($widgets);
         $response = new JsonResponse();
         $response->setData(array(
             'valid' => 1
