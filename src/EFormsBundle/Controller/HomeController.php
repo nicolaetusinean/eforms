@@ -37,9 +37,11 @@ class HomeController extends Controller
     public function viewAction(Request $request, $id = null)
     {
         $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
+        $form = $dm->find(Form::class, $id);
+        $form = $this->container->get('serializer')->normalize($form);
 
         return array(
-            'form' => $dm->find(Form::class, $id),
+            'form' => reset($form['sections'])['widgets'],
         );
     }
 }
