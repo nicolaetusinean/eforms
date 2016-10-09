@@ -50,10 +50,28 @@ jQuery(document).ready(function($) {
   var formBuilder = $(buildWrap).formBuilder(fbOptions).data('formBuilder');
 
   $('.form-builder-save').click(function(e) {
+    var formName = $("#formName").val();
+    if (formName == "") {
+      alert("alegeti numele formularului");
+      return;
+    }
+    var formDescription = $("#formDescription").val();
+
     toggleEdit();
     $(renderWrap).formRender({
       dataType: 'json',
       formData: formBuilder.formData
+    });
+
+    $.ajax({
+      url: '/app_dev.php/admin/save',
+      type: 'POST',
+      data: {
+        name: formName,
+        description: formDescription,
+        json: formBuilder.formData
+      },
+    dataType: 'json'
     });
 
     window.sessionStorage.setItem('formData', JSON.stringify(formBuilder.formData));
