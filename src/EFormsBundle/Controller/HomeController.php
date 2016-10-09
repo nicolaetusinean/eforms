@@ -18,7 +18,11 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return array('a' => 'b');
+        $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
+        $qb = $dm->createQueryBuilder();
+        $query = $qb->find(Form::class)->getQuery();
+
+        return ["data" => $query->execute()];
     }
 
     /**

@@ -15,7 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class AdminController extends Controller
 {
-
     /**
      * @param Request $request
      *
@@ -42,10 +41,6 @@ class AdminController extends Controller
     public function createAction(Request $request, $id = null)
     {
         return array('a' => 'c');
-        // replace this example code with whatever you need
-        /*return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);*/
     }
 
     /**
