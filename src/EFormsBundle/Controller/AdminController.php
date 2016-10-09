@@ -16,10 +16,11 @@ class AdminController extends Controller
 {
 
     /**
-     * @Route("/admin")
+     * @Route("/admin/list", name="eforms_admin_list")
+     *
      * @Template
      */
-    public function indexAction(Request $request)
+    public function listAction(Request $request)
     {
         $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
         $qb = $dm->createQueryBuilder();
