@@ -17,19 +17,19 @@ class Option
      *
      * @ODM\Field
      */
-    protected $label;
+    public $label;
 
     /**
      * @var string
      *
      * @ODM\Field
      */
-    protected $value;
+    public $value;
 
     /**
      * @var string
      *
      * @ODM\Field(type="bool")
      */
-    protected $selected = false;
+    public $selected = false;
 }

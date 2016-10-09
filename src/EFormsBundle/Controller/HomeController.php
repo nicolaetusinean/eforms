@@ -38,6 +38,7 @@ class HomeController extends Controller
     public function viewAction(Request $request, $id = null)
     {
         $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
+        /** @var Form $form */
         $form = $dm->find(Form::class, $id);
 
         if ($form === null) {
@@ -46,9 +47,9 @@ class HomeController extends Controller
             throw new NotFoundHttpException($msg);
         }
 
-        $form = $this->container->get('serializer')->normalize($form);
-        $section = reset($form['sections']);
-        $widgets = $section['widgets'];
+        $widgets = $form->sections->first()->widgets;
+
+        $widgets = $this->container->get('serializer')->normalize($widgets);
 
         return array('widgets' => $widgets);
     }
