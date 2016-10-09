@@ -2,6 +2,8 @@
 
 namespace EFormsBundle\Traits;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 trait ConstructableProperties
 {
     /**
@@ -12,6 +14,7 @@ trait ConstructableProperties
         foreach ($data as $key => $value) {
             $isId = substr($key, -3) === '_id';
             $key = $isId ? substr($key, 0, -3) : $key;
+            $value = is_array($value) ? new ArrayCollection($value) : $value;
 
             if (property_exists($this, $key)) {
                 $this->$key = $value;

@@ -22,11 +22,11 @@ class Section
     public $label;
 
     /**
-     * @var FormWidget[]
+     * @var Widget[]
      *
-     * @ODM\EmbedMany(targetDocument="FormWidget")
+     * @ODM\EmbedMany(targetDocument="Widget")
      */
-    public $widgets;
+    public $widgets = [];
 
     /**
      * @param array $data
@@ -35,7 +35,7 @@ class Section
     {
         $widgets = $data['widgets'] ?? [];
         foreach ($widgets as &$widget) {
-            $widget = new FormWidget($widget);
+            $widget = new Widget($widget);
         }
 
         $this->_construct($data);

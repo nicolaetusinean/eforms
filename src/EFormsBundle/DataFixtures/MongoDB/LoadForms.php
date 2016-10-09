@@ -25,7 +25,6 @@ class LoadForms implements FixtureInterface
                                 'min' => '0',
                                 'step' => '1',
                                 'name' => 'cerere-numar',
-                                'widget_id' => '57f921c5c6047b800f1e2124',
                             ),
                         ),
                 ),
@@ -39,7 +38,6 @@ class LoadForms implements FixtureInterface
                                 'label' => 'Nume',
                                 'subtype' => 'text',
                                 'name' => 'solicitant-nume',
-                                'widget_id' => '57f921aac6047b800f1e2123',
                             ),
                             array(
                                 'type' => 'text',
@@ -47,7 +45,6 @@ class LoadForms implements FixtureInterface
                                 'label' => 'Prenume',
                                 'subtype' => 'text',
                                 'name' => 'solicitant-prenume',
-                                'widget_id' => '57f921aac6047b800f1e2123',
                             ),
                             array(
                                 'type' => 'select',
@@ -69,7 +66,6 @@ class LoadForms implements FixtureInterface
                                             'selected' => false,
                                         ),
                                     ),
-                                'widget_id' => '57f921fbc6047b800f1e2126',
                             ),
                             array(
                                 'type' => 'text',
@@ -77,7 +73,6 @@ class LoadForms implements FixtureInterface
                                 'label' => 'CNP',
                                 'subtype' => 'text',
                                 'name' => 'solicitant-cnp',
-                                'widget_id' => '57f921aac6047b800f1e2123',
                             ),
                             array(
                                 'type' => 'date',
@@ -85,7 +80,6 @@ class LoadForms implements FixtureInterface
                                 'label' => 'Data eliberare CI',
                                 'subtype' => 'text',
                                 'name' => 'solicitant-cnp',
-                                'widget_id' => '57f921e6c6047b800f1e2125',
                             ),
                         ),
                 ),
