@@ -91,7 +91,7 @@ var Validator = {
             object.message = options.message;
         } else {
             if (typeof object.message !== 'string') {
-                object.message = 'fieldInvalid';
+                object.message = 'Campul este invalid';
             }
         }
 
@@ -118,6 +118,10 @@ var Validator = {
 Validator.Regex = function(options) {
 
     var self = Validator.assignNotRequiredOptions(options, this);
+
+    if (!self.message) {
+        self.message = 'Campul nu este valid'
+    }
 
     self.pattern = null;
 
@@ -177,6 +181,9 @@ Validator.Cnp = function(options) {
         options = {pattern: pattern};
     }
 
+    if (!options.message) {
+        options.message = 'Campul nu este valid'
+    }
     return new Validator.Regex(options);
 };
 
@@ -191,7 +198,7 @@ Validator.Cnp = function(options) {
  */
 Validator.IsNumeric = function(options) {
     var pattern = /^\d+$/;
-    var message = 'fieldNotNumeric';
+    var message = 'Campul nu este numeric';
 
     if (typeof options === 'object' && typeof options.message === 'string') {
         message = options.message;
@@ -210,7 +217,7 @@ Validator.IsNumeric = function(options) {
  * @constructor
  */
 Validator.PresenceOf = function(options) {
-    this.message = 'fieldRequired';
+    this.message = 'Camp obligatoriu';
     var self = Validator.assignNotRequiredOptions(options, this);
 
     this.validate = function(params) {
@@ -242,8 +249,8 @@ Validator.StringLength = function(options) {
     self.min = null;
     self.max = null;
 
-    self.messageMinimum = null;
-    self.messageMaximum = null;
+    self.messageMinimum = 'Valoarea minima nu este corespunzatoare';
+    self.messageMaximum = 'Valoarea maxima nu este corespunzatoare';
 
     var numericPattern = /^\d+$/;
 
@@ -312,7 +319,7 @@ Validator.StringLength = function(options) {
  * @constructor
  */
 Validator.Identical = function(options) {
-    this.message = 'fieldNotIdentical';
+    this.message = 'Campul nu este identic';
 
     var self = Validator.assignNotRequiredOptions(options, this);
 
@@ -354,8 +361,8 @@ Validator.Between = function(options) {
     self.min = null;
     self.max = null;
 
-    self.messageMinimum = null;
-    self.messageMaximum = null;
+    self.messageMinimum = 'Valoarea minima nu este corespunzatoare';
+    self.messageMaximum = 'Valoarea maxima nu este corespunzatoare';
 
     if (typeof options === 'object' && typeof options.min === 'number') {
         self.min = parseFloat(options.min);

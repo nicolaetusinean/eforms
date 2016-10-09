@@ -1,7 +1,6 @@
 jQuery(document).ready(function($) {
   var buildWrap = document.querySelector('.build-wrap'),
       renderWrap = document.querySelector('.render-wrap'),
-      editBtn = document.getElementById('edit-form'),
       formData = window.sessionStorage.getItem('formData'),
       editing = true,
       fbOptions = {
@@ -71,13 +70,9 @@ jQuery(document).ready(function($) {
         description: formDescription,
         json: formBuilder.formData
       },
-    dataType: 'json'
+      dataType: 'json'
     });
 
     window.sessionStorage.setItem('formData', JSON.stringify(formBuilder.formData));
   });
-
-  editBtn.onclick = function() {
-    toggleEdit();
-  };
 });
