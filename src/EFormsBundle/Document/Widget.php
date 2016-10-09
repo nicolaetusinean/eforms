@@ -2,6 +2,7 @@
 
 namespace EFormsBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use EFormsBundle\Traits\ConstructableProperties;
 
@@ -126,10 +127,11 @@ class Widget
      */
     public function __construct(array $data = [])
     {
-        $values = $data['values'] ?? [];
+        $values = isset($data['values']) ? $data['values'] : [];
         foreach ($values as &$value) {
             $value = new Option($value);
         }
+        $data['values'] = $values;
 
         $this->_construct($data);
     }

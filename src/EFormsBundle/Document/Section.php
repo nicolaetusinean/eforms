@@ -2,6 +2,7 @@
 
 namespace EFormsBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use EFormsBundle\Traits\ConstructableProperties;
 
@@ -33,10 +34,11 @@ class Section
      */
     public function __construct(array $data = [])
     {
-        $widgets = $data['widgets'] ?? [];
+        $widgets = isset($data['widgets']) ? $data['widgets'] : [];
         foreach ($widgets as &$widget) {
             $widget = new Widget($widget);
         }
+        $data['widgets'] = $widgets;
 
         $this->_construct($data);
     }

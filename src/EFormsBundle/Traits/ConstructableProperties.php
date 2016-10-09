@@ -14,7 +14,7 @@ trait ConstructableProperties
         foreach ($data as $key => $value) {
             $isId = substr($key, -3) === '_id';
             $key = $isId ? substr($key, 0, -3) : $key;
-            $value = is_array($value) ? new ArrayCollection($value) : $value;
+            $value = !is_scalar($value) ? new ArrayCollection($value) : $value;
 
             if (property_exists($this, $key)) {
                 $this->$key = $value;
