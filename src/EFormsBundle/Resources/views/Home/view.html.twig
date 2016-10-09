@@ -1,0 +1,22 @@
+{% extends "EFormsBundle:Admin:leftSideBarBase.html.twig" %}
+
+{% block rightsidebar %}
+    <h1 class="page-header">Creeaza un formular nou</h1>
+    <div class="build-wrap"></div>
+    <div class="render-wrap"></div>
+    <button id="edit-form">Edit Form</button>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/eforms/js/form-render.min.js') }}"></script>
+    <script src="{{ asset('bundles/eforms/js/demo.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eforms/css/form-builder.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eforms/css/form-render.min.css') }}" />
+{% endblock %}
+
+{% block container %}
+
+{% endblock %}
