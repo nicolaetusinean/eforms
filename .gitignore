@@ -16,4 +16,5 @@
 /web/bundles/
 .idea
 composer.phar
+.vagrant
 Vagrantfile
