@@ -10,7 +10,9 @@ use EFormsBundle\Traits\ConstructableProperties;
  */
 class Form
 {
-    use ConstructableProperties;
+    use ConstructableProperties {
+        __construct as _construct;
+    }
 
     /**
      * @var int
@@ -27,9 +29,29 @@ class Form
     public $label;
 
     /**
+     * @var string
+     *
+     * @ODM\Field
+     */
+    public $description;
+
+    /**
      * @var Section[]
      *
      * @ODM\EmbedMany(targetDocument="Section")
      */
     public $sections = [];
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $sections = $data['sections'] ?? [];
+        foreach ($sections as &$section) {
+            $section = new Section($section);
+        }
+
+        $this->_construct($data);
+    }
 }

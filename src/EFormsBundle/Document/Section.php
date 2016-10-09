@@ -10,7 +10,9 @@ use EFormsBundle\Traits\ConstructableProperties;
  */
 class Section
 {
-    use ConstructableProperties;
+    use ConstructableProperties {
+        __construct as _construct;
+    }
 
     /**
      * @var string
@@ -25,4 +27,17 @@ class Section
      * @ODM\EmbedMany(targetDocument="FormWidget")
      */
     public $widgets;
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $widgets = $data['widgets'] ?? [];
+        foreach ($widgets as &$widget) {
+            $widget = new FormWidget($widget);
+        }
+
+        $this->_construct($data);
+    }
 }
