@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
         var _formData = $(_formSelector).serializeArray();
         var valid = validateFormData(_formData, _formBuilderData);
         if (valid === true) {
-            _form.attr('action', '/callback');
+            _form.attr('action', 'http://193.230.8.27:18081/callback');
             _form.submit();
         } else {
             _errorsHandler.handle(_form, valid);
