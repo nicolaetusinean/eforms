@@ -51,6 +51,7 @@ class AdminController extends Controller
 
         $form = new Form();
         $form->label = $request->request->get('name');
+        $form->description = $request->request->get('description');
 
         $section = new Section();
         $section->label = "Test Section";

@@ -47,7 +47,8 @@ jQuery(document).ready(function($) {
       alert("alegeti numele formularului");
       return;
     }
-    //console.log(formBuilder.formData);
+    var formDescription = $("#formDescription").val();
+
     toggleEdit();
     $(renderWrap).formRender({
       dataType: 'json',
@@ -59,6 +60,7 @@ jQuery(document).ready(function($) {
       type: 'POST',
       data: {
         name: formName,
+        description: formDescription,
         json: formBuilder.formData
       },
     dataType: 'json'
