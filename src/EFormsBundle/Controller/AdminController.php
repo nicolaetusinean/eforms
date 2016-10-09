@@ -15,12 +15,12 @@ class AdminController extends Controller
      * @Route("/admin")
      * @Template
      */
-    public function listAction(Request $request)
+    public function indexAction(Request $request)
     {
         $dm = $this->container->get('doctrine_mongodb.odm.document_manager');
         $qb = $dm->createQueryBuilder();
         $query = $qb->find(Form::class)->getQuery();
-        
+
         return ["data" => $query->execute()];
     }
 
