@@ -53,12 +53,12 @@ jQuery(document).ready(function($) {
                     validation.add(fieldName, new Validator.PresenceOf());
                 }
 
-                if (formBuilderData[fieldName]['min'] || formBuilderData[fieldName]['max']) {
-                    validation.add(fieldName, new Validator.Between({
-                        'min': (formBuilderData[fieldName]['min'] ? formBuilderData[fieldName]['min'] : 0),
-                        'max': (formBuilderData[fieldName]['max'] ? formBuilderData[fieldName]['max'] : null)
-                    }))
-                }
+                //if (formBuilderData[fieldName]['min'] || formBuilderData[fieldName]['max']) {
+                //    validation.add(fieldName, new Validator.Between({
+                //        'min': (formBuilderData[fieldName]['min'] ? formBuilderData[fieldName]['min'] : 0),
+                //        'max': (formBuilderData[fieldName]['max'] ? formBuilderData[fieldName]['max'] : null)
+                //    }))
+                //}
 
                 if (typeof formBuilderData[fieldName]['maxlength'] !== "undefined") {
                     validation.add(fieldName, new Validator.StringLength({
