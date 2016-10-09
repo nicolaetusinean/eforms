@@ -22,13 +22,13 @@ jQuery(document).ready(function($) {
     });
 
     addClassToFormElements($(_formSelector), _formBuilderData, 'form-control');
-    $('.submitBtn').click(function() {
+    $('#submitBtn').click(function() {
         _errorsHandler.removeErrors(_form);
 
         var _formData = $(_formSelector).serializeArray();
         var valid = validateFormData(_formData, _formBuilderData);
         if (valid === true) {
-            _form.attr('action', URL);
+            _form.attr('action', '/callback');
             _form.submit();
         } else {
             _errorsHandler.handle(_form, valid);
@@ -43,49 +43,49 @@ jQuery(document).ready(function($) {
      */
     function validateFormData(formData, formBuilderData)
     {
-        var validation = new Validation();
-
-        validation.add('username', new Validator.PresenceOf());
-
-        $.each(formData, function(fieldName, fieldValue) {
-            if (typeof formBuilderData(fieldName) !== "undefined") {
-                if (formBuilderData(fieldName)['required']) {
+        var validation = new Validation(), fieldName;
+        var _valuesToValidate = {};
+        $.each(formData, function(index, field) {
+            fieldName = field['name'];
+            _valuesToValidate[fieldName] = field['value'];
+            if (typeof formBuilderData[fieldName] !== "undefined") {
+                if (formBuilderData[fieldName]['required']) {
                     validation.add(fieldName, new Validator.PresenceOf());
                 }
 
-                if (typeof formBuilderData(fieldName)['min'] !== "undefined" || typeof formBuilderData(fieldName)['max'] !== "undefined") {
-                    validation.add(fieldName, new Validator.Between({
-                        'min': (formBuilderData(fieldName)['min'] ? formBuilderData(fieldName)['min'] : null),
-                        'max': (formBuilderData(fieldName)['max'] ? formBuilderData(fieldName)['max'] : null)
-                    }))
-                }
+                //if (typeof formBuilderData[fieldName]['min'] !== "undefined" || typeof formBuilderData[fieldName]['max'] !== "undefined") {
+                //    validation.add(fieldName, new Validator.Between({
+                //        'min': (formBuilderData[fieldName]['min'] ? formBuilderData[fieldName]['min'] : 0),
+                //        'max': (formBuilderData[fieldName]['max'] ? formBuilderData[fieldName]['max'] : null)
+                //    }))
+                //}
 
-                if (typeof formBuilderData(fieldName)['maxlength'] !== "undefined") {
+                if (typeof formBuilderData[fieldName]['maxlength'] !== "undefined") {
                     validation.add(fieldName, new Validator.StringLength({
                         'min': 0,
-                        'max': formBuilderData(fieldName)['maxlength']
+                        'max': formBuilderData[fieldName]['maxlength']
                     }))
                 }
 
-                if (typeof formBuilderData(fieldName)['className'] === 'string') {
+                if (typeof formBuilderData[fieldName]['className'] === 'string') {
 
-                    var classArr = formBuilderData(fieldName)['className'].split(/\s+/);
+                    var classArr = formBuilderData[fieldName]['className'].split(/\s+/);
 
                     $.each(classArr, function(index, className) {
                         if (typeof Validator[className] !== "undefined") {
-                            validation.add(fieldName, new Validator[formBuilderData(fieldName)['className']]());
+                            validation.add(fieldName, new Validator[formBuilderData[fieldName]['className']]());
                         }
                     });
 
                 }
             }
-
-            if (validation.chain.length) {
-                return validation.validate(formData);
-            }
-
-            return true;
         });
+
+        if (validation.chain.length) {
+            return validation.validate(_valuesToValidate);
+        }
+
+        return true;
     }
 
     function addClassToFormElements(form, formBuilderData, className)

@@ -113,3 +113,7 @@ body {
 .forms-list .description {
     height: 82px;
 }
+.errors {
+    color: white;
+    background-color: red;
+}
