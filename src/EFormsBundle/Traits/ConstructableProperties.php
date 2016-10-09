@@ -3,6 +3,7 @@
 namespace EFormsBundle\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use EFormsBundle\Document\Collection;
 
 trait ConstructableProperties
 {

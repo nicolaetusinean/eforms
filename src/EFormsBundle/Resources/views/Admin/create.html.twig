@@ -1,10 +1,19 @@
 {% extends "EFormsBundle:Admin:leftSideBarBase.html.twig" %}
 
 {% block rightsidebar %}
-    <h1 class="page-header">Creeaza un formular nou</h1>
+    <h1 class="page-header">Creare formular</h1>
+    <h2>Date formular</h2>
+    <div class="form-group">
+        <label for="formName">Nume Formular</label>
+        <input type="text" class="form-control" id="formName" placeholder="Numele formularului">
+    </div>
+    <div class="form-group">
+        <label for="formName">Descriere</label>
+        <textarea class="form-control" rows="3" placeholder="Descriere" id="formDescription"></textarea>
+    </div>
+    <h2>Campuri de completat</h2>
     <div class="build-wrap"></div>
     <div class="render-wrap"></div>
-    <button id="edit-form">Edit Form</button>
 {% endblock %}
 
 {% block javascripts %}

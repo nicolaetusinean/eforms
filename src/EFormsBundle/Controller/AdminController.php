@@ -3,8 +3,12 @@
 namespace EFormsBundle\Controller;
 
 use EFormsBundle\Document\Form;
+use EFormsBundle\Document\FormWidget;
+use EFormsBundle\Document\Section;
+use EFormsBundle\Document\Widget;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -39,6 +43,37 @@ class AdminController extends Controller
         ]);*/
     }
 
+    /**
+     * @Route("/admin/save")
+     */
+    public function saveAction(Request $request)
+    {
+        $widgets = json_decode($request->request->get('json'));
+        $widgets = json_decode(json_encode($widgets), true);
+
+        $form = new Form();
+        $form->label = $request->request->get('name');
+        $form->description = $request->request->get('description');
+
+        $section = new Section();
+        $section->label = "Test Section";
+
+        foreach($widgets as $widgetData) {
+            $widget = new Widget($widgetData);
+            $section->widgets[] = $widget;
+        }
+
+        $form->sections[] = $section;
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($form);
+        $dm->flush();
+
+        $response = new JsonResponse();
+        $response->setData(array(
+            'valid' => 1
+        ));
+        return $response;
+    }
 
     /**
      * @param Request $request
