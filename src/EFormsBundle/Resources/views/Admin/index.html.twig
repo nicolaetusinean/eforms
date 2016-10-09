@@ -1,6 +1,9 @@
 {% extends "EFormsBundle:Admin:leftSideBarBase.html.twig" %}
 
 {% block rightsidebar %}
+	{% if app.request.get('success') %}
+		<div class="alert alert-success" role="alert">Formularul a fost salvat</div>
+	{% endif %}
     <h1 class="page-header">Formulare active</h1>
 	<div class="row">
 		{% for item in data %}
