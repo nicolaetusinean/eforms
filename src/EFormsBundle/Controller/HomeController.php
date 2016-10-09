@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class HomeController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="eforms_home_index")
      *
      * @Template
      */
